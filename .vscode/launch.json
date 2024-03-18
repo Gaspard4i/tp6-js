@@ -5,14 +5,22 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "Debug on Chrome",
+			"name": "Chromium Debug",
+			"type": "chrome",
+			"request": "launch",
+			"url": "http://localhost:8000",
+			"webRoot": "${workspaceFolder}",
+			"runtimeExecutable": "/bin/chromium"
+		},
+		{
+			"name": "Chrome Debug",
 			"type": "chrome",
 			"request": "launch",
 			"url": "http://localhost:8000",
 			"webRoot": "${workspaceFolder}"
 		},
 		{
-			"name": "Debug on Firefox",
+			"name": "Firefox debug",
 			"type": "firefox",
 			"request": "launch",
 			"reAttach": true,
