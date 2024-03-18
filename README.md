@@ -14,32 +14,42 @@
 
 **Comme le but de ce TP est de vous entrainer à réaliser seul une SPA, vous allez être beaucoup moins dirigés que lors des précédents TPs.**
 
-N'hésitez pas à vous référer aux pdf des différents cours sur moodle, à revoir votre code des précédents TPs, ou à demander à votre encadrant.e de TP ! Profitez-en : les documents sont autorisés pour ce TP (_ce qui ne sera PAS le cas lors du CTP_ 😈).
+N'hésitez pas à vous référer aux pdf des différents cours sur moodle, à revoir votre code des précédents TPs, ou à demander à votre encadrant.e de TP !
 
 
 ## A. Préparatifs
-1. **Faites un fork de ce TP :**
-	- mettez le fork en mode "privé"
-	- ajoutez votre encadrant.e de TP en "reporter" (`@patricia.everaere-caillier` ou `@thomas.fritsch`)
-2. **Ouvrez le dossier du TP dans vscodium.**
+1. **Faites un fork de ce TP sur https://gitlab.univ-lille.fr/js/tp6/-/forks/new**
+
+	- Pour le `namespace` choisissez de placer le fork dans votre profil utilisateur.\
+	- Pour `Visibility Level` sélectionnez le **mode "private"**\
+	- ajoutez en **"reporter"** votre encadrant.e de TP (`@patricia.everaere-caillier`, `@catherine.verbrugge` ou `@thomas.fritsch`)
+
+2. **Clonez votre fork et ouvrez le dans VSCode :**
+	```bash
+	mkdir ~/tps-js
+	git clone https://gitlab.univ-lille.fr/<votre-username>/tp6.git ~/tps-js/tp6
+	code ~/tps-js/tp6
+	```
 
 	Vous constaterez que **la vie est belle** : la configuration de babel, webpack et du debug dans vscode sont déjà faites ! Vous avez aussi un fichier index.html et des css fournies, vous allez pouvoir vous concentrer sur le JS !
 
-4. **Installez les dépendances du projet** avec `npm i`
-5. **Lancez webpack-dev-server** avec `npm start`
+3. **Lancez votre serveur de développement webpack-dev-server dans un terminal intégré de VSCode** (<kbd>CTRL/Cmd</kbd>+<kbd>J</kbd>) :
+	```bash
+	npm i
+	npm start
+	```
 
-	Vous vous souvenez à quoi exactement sert webpack-dev-server ? Non ? Alors faites vite fait un tour ici : https://gitlab.univ-lille.fr/js/tp3/-/blob/main/C-modules.md#c6-webpack-live-reload
+	> **Rappel de cours :**
+	>
+	> Pour rappel `npm i` c'est un "raccourci" pour la commande `npm install` : cette commande permet de télécharger, dans un dossier `/node_modules` à la racine du projet, TOUS les paquets dont on a besoin (les "dépendances" du projet). Pour savoir quels sont les paquets à télécharger, npm va lire le contenu du fichier `package.json` (plus d'explications dans le [TP2 - A.4. Le fichier `package.json`](https://gitlab.univ-lille.fr/js/tp2/-/blob/main/A-preparatifs.md?ref_type=heads#a4-le-fichier-packagejson) )
+	>
+	> Si vous regardez le contenu du dossier `/node_modules`, vous y trouverez des dossiers pour `@babel`, `prettier`, `webpack` etc.
+	>
+	> D'ailleurs en parlant de webpack, on a dit que `npm start` lançait `webpack-dev-server` mais vous vous souvenez de ce que c'est ? Non ? Alors allez voir un peu faire un tour dans le TP3, ici : https://gitlab.univ-lille.fr/js/tp3/-/blob/main/C-modules.md#c6-webpack-live-reload
 
-7. **Lancez une session de debug dans vscode :**
-	> _Si vous n'aviez pas pu faire cette partie du TP3 pour des questions de compatibilité de Firefox, je vous invite à :_
-	> 1. _suivre le tutoriel spécifique à Firefox ici : https://gitlab.univ-lille.fr/js/tp3/-/blob/main/B-debug-vscode-firefox.md_
-	> 2. _prendre connaissance des différentes possibilités offertes par le debug dans vscode ici : https://gitlab.univ-lille.fr/js/tp3/-/blob/main/B-debug-vscode.md#b2-utilisation-du-mode-debug_
+4. **Lancez votre site en mode "debug dans vscode"** : tapez <kbd>CTRL</kbd>+<kbd>SHIFT</kbd>+<kbd>P</kbd> puis sélectionnez `"Debug: Select and start debugging"` ou appuyez simplement sur la touche <kbd>F5</kbd> (_<kbd>F5</kbd> lance en principe le dernier navigateur que vous aviez lancé dans les précédents TP. Vérifiez dans le panneau "Run & Debug" avec <kbd>CTRL</kbd>+<kbd>SHIFT</kbd>+<kbd>d</kbd> quel est le navigateur dans la liste déroulante tout en haut_).
 
-	Pour lancer votre site en mode "debug dans vscode", tapez <kbd>CTRL</kbd>+<kbd>SHIFT</kbd>+<kbd>P</kbd> puis sélectionnez "Debug: Select and start debugging" ou simplement <kbd>F5</kbd>
-
-	Choisissez le navigateur que vous souhaitez lancer (Firefox ou Chrome), une nouvelle fenêtre de votre navigateur doit s'ouvrir (_on considérera pour la suite que c'est Chrome que vous avez choisi_).
-
-6. **Vérifiez que le rendu dans le navigateur est bien le suivant**, et si oui, vous allez pouvoir passer à la suite. \
+5. **Vérifiez que le rendu dans le navigateur est bien le suivant**, et si oui, vous allez pouvoir passer à la suite. \
 	En cas de problème, harcelez votre encadrant.e de TP (_il ne faut pas perdre de temps sur cette étape_) !
 
 	<img src="images/readme/screen-00.png" />
@@ -51,7 +61,8 @@ Dans ce TP vous allez :
 - au clic sur un élément de la liste, lancer un 2e appel AJAX pour récupérer le détail du pokémon cliqué et l'afficher dans la partie de droite
 
 Commençons par nous intéresser à la liste :
-1. Tout d'abord ajoutez le fichier `build/main.bundle.js` dans la page `index.html` (_actuellement il n'est pas chargé_)
+1. Tout d'abord ajoutez le fichier `build/main.bundle.js` dans la page `index.html` (_actuellement il n'est pas chargé mais pour rappel vous avez fait ça au [TP1 dans la partie B.2. Inclure le JS dans la page](https://gitlab.univ-lille.fr/js/tp1/-/blob/main/B-integration.md?ref_type=heads#b2-inclure-le-js-dans-la-page) !!!_)
+
 2. En JS, masquez :
 	- le formulaire de filtre,
 	- la barre de progression de droite
@@ -84,7 +95,7 @@ Maintenant que vous avez récupéré les pokémons de la bdd, faites en sorte qu
 
 ## D. Détail d'un Pokémon
 
-Faites en sorte maintenant que quand on clique sur un pokémon de la liste, le détail s'affiche ! Pour cela
+Faites en sorte maintenant que quand on clique sur un pokémon de la liste, le détail s'affiche ! Pour cela :
 
 1. Ajoutez la classe "active" sur le lien qui a été cliqué (_et l'enlever du précédent lien_)
 
