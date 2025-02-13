@@ -5,36 +5,19 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "Chromium Debug",
 			"type": "chrome",
 			"request": "launch",
+			"name": "Debug Chromium",
 			"url": "http://localhost:8000",
 			"webRoot": "${workspaceFolder}",
 			"runtimeExecutable": "/bin/chromium"
 		},
 		{
-			"name": "Chrome Debug",
+			"name": "Debug Chrome",
 			"type": "chrome",
 			"request": "launch",
 			"url": "http://localhost:8000",
 			"webRoot": "${workspaceFolder}"
-		},
-		{
-			"name": "Firefox debug",
-			"type": "firefox",
-			"request": "launch",
-			"reAttach": true,
-			"port": 8008,
-			"timeout": 25,
-			"url": "http://localhost:8000",
-			"webRoot": "${workspaceFolder}",
-			"pathMappings": [
-				{
-					"url": "webpack://pokejs/src",
-					"path": "${workspaceFolder}/src"
-				},
-				{ "url": "http://localhost:8000/build", "path": null }
-			]
 		}
 	]
 }
